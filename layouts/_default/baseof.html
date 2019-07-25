@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-Hans">
+<html lang="en">
   <head>
     {{ partial "head-meta" . }}
 
@@ -7,14 +7,18 @@
     <link rel="canonical" href="{{ .Permalink }}">
 
     {{ $title := delimit (slice .Title "&middot;" .Site.Title) " " }}
+    {{ if .IsHome }}
+    <title>{{ .Site.Title }}</title>
+    {{ else }}    
     <title>{{ $title }}</title>
+    {{ end }}
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="{{ .Site.BaseURL }}css/style.css" rel="stylesheet">
-
-    {{ with .OutputFormats.Get "rss" -}}
-      {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+    
+    {{ range .AlternativeOutputFormats -}}
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
     {{ end -}}
 
     {{ template "_internal/google_analytics_async.html" . }}

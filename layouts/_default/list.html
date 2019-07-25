@@ -1,14 +1,16 @@
 {{ define "main" }}
 
 {{ $truncate := default true .Site.Params.truncate }}
+
 {{ range .Paginator.Pages }}
-
-    {{ if $truncate }}
-        {{ .Render "summary" }}
-    {{ else }}
-        {{ .Render "content" }}
+{{/* $currentPage := . */}}
+    {{ if eq (substr .RelPermalink 0 7) "/posts/"}}
+        {{ if $truncate }}
+            {{ .Render "summary" }}
+        {{ else }}
+            {{ .Render "content" }}
+        {{ end }}
     {{ end }}
-
 {{ end }}
 
 {{ partial "paginator" . }}
