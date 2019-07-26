@@ -17,7 +17,7 @@
                 {{ $menus := .Site.Menus }}
                 {{ $colWidth := math.Floor (div 12 (len .Site.Params.footer_menus)) }}
                 {{ range $index, $menu := .Site.Params.footer_menus }}
-                    <div class="col s{{ $colWidth }} clear-padding">
+                    <div class="col s{{ $colWidth }}">
                         {{ partial "menu-links" (dict "menu" (index $menus $menu.menu) "name" $menu.name ) }}
                     </div>
                 {{ end }}
