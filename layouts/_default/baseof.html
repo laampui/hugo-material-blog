@@ -4,6 +4,7 @@
     {{ partial "head-meta" . }}
 
     <meta name="description" content="{{ .Description }}">
+    <meta name="theme-color" content="#2196f3">
     <link rel="canonical" href="{{ .Permalink }}">
 
     {{ $title := delimit (slice .Title "&middot;" .Site.Title) " " }}
@@ -16,6 +17,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="{{ .Site.BaseURL }}css/style.css" rel="stylesheet">
+    <link href="{{ .Site.BaseURL }}js/manifest.json" rel="manifest">
     
     {{ range .AlternativeOutputFormats -}}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
